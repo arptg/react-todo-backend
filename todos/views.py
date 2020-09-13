@@ -1,10 +1,12 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.authentication import JWTAuthentication
 from .serializers import TodoSerializer, LabelSerializer, Todo, TodoLabel
 
 
 class TodoRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    authentication_classes = [JWTAuthentication]
     permission_classes = (IsAuthenticated,)
     serializer_class = TodoSerializer
     queryset = Todo.objects.all()
@@ -15,6 +17,7 @@ class TodoRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class TodoListCreateView (generics.ListCreateAPIView):
+    authentication_classes = [JWTAuthentication]
     permission_classes = (IsAuthenticated,)
     serializer_class = TodoSerializer
 
@@ -28,6 +31,7 @@ class TodoListCreateView (generics.ListCreateAPIView):
 
 
 class LabelListCreateView(generics.ListCreateAPIView):
+    authentication_classes = [JWTAuthentication]
     permission_classes = (IsAuthenticated,)
     serializer_class = LabelSerializer
 
