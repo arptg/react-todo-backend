@@ -3,6 +3,8 @@ from .models import Todo, TodoLabel
 
 
 class TodoSerializer(serializers.ModelSerializer):
+    label_name = serializers.ReadOnlyField(source='label.name')
+
     class Meta:
         model = Todo
         fields = (
@@ -11,6 +13,7 @@ class TodoSerializer(serializers.ModelSerializer):
             'description',
             'done',
             'label',
+            'label_name',
             'user'
         )
 
